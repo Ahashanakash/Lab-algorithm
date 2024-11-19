@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+#define ll long long
+
+using namespace std;
+
+ll knapSack(ll cap, vector<ll> weight, vector<ll> value, ll n)
+{
+    vector<vector<ll>> profit(n + 1, vector<ll>(cap + 1, 0));
+    for (ll i = 0; i <= n; i++)
+    {
+        for (ll w = 0; w <= cap; w++)
+        {
+            if (i == 0 || w == 0)
+                profit[i][w] = 0;
+            else if (weight[i - 1] <= w)
+            {
+                profit[i][w] = max(profit[i - 1][w], profit[i - 1][w - weight[i - 1]] + value[i - 1]);
+                cout << weight[w] << " " << value[i - 1] << '\n';
+            }
+            else
+                profit[i][w] = profit[i - 1][w];
+        }
+    }
+    return profit[n][cap];
+}
+
+int main()
+{
+    ll cap = 5;
+    vector<ll> weight = {1, 2, 3};
+    vector<ll> value = {6, 10, 9};
+    ll n = weight.size();
+    cout << "Ans = " << knapSack(cap, weight, value, n);
+    return 0;
+}
