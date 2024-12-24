@@ -15,7 +15,8 @@ ll knapSack(ll cap, vector<ll> weight, vector<ll> value, ll n)
             else if (weight[i - 1] <= w)
             {
                 profit[i][w] = max(profit[i - 1][w], profit[i - 1][w - weight[i - 1]] + value[i - 1]);
-                cout << weight[w] << " " << value[i - 1] << '\n';
+                cout << "Using item " << i << " with weight " << weight[i - 1]
+                     << " and value " << value[i - 1] << '\n';
             }
             else
                 profit[i][w] = profit[i - 1][w];
